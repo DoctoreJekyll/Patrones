@@ -5,7 +5,7 @@ namespace Ships
 {
     public class ShipConfigure : MonoBehaviour
     {
-        [SerializeField] private Ship ship;
+        [SerializeField] private ShipMediator shipMediator;
         [SerializeField] private Joystick joystick;
         [SerializeField] private JoyButton joyButton;
         [SerializeField] private bool isUsingJoystic;
@@ -13,22 +13,22 @@ namespace Ships
 
         private void Awake()
         {
-            ship.Configure(GetInput(), CheckLimits());
+            shipMediator.Configure(GetInput(), CheckLimits());
         }
 
         private IInput GetInput()
         {
             if (useIA)
             {
-                return new AIInputAdapter(ship);
+                return new AIInputAdapter(shipMediator);
             }
             
             if (isUsingJoystic)
             {
                 return new JoystickInputAdapter(joystick, joyButton);
             }
-            Destroy(joystick);
-            Destroy(joyButton);
+            Destroy(joystick.gameObject);
+            Destroy(joyButton.gameObject);
 
             return new UnityInputAdapter();
         }
@@ -37,10 +37,10 @@ namespace Ships
         {
             if (useIA)
             {
-                return new InitialPosCheckLimits(ship.transform, 10f);
+                return new InitialPosCheckLimits(shipMediator.transform, 10f);
             }
             
-            return new ViewportCheckLimits(ship.transform);
+            return new ViewportCheckLimits(shipMediator.transform);
         }
     }
 }

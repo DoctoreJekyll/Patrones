@@ -4,6 +4,13 @@ namespace Patterns.Mediator
 {
     public class Wheel : MonoBehaviour
     {
+        private IVehicleMediator vehicleMediator;
+
+        public void Configure(IVehicleMediator mediator)
+        {
+            this.vehicleMediator = mediator;
+        }
+        
         public void AddFriction()
         {
         }

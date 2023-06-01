@@ -5,33 +5,22 @@ namespace Patterns.Mediator
 {
     public class SteeringWheel : MonoBehaviour
     {
-        [SerializeField] private Wheel[] _wheels;
+        private IVehicleMediator vehicleMediator;
+        
+        public void Configure(IVehicleMediator vehicleMediatorT)
+        {
+            this.vehicleMediator = vehicleMediatorT;
+        }
 
         private void Update()
         {
-            if (UnityEngine.Input.GetButtonDown("Left"))
+            if (Input.GetButtonDown("Left"))
             {
-                TurnLeft();
+                vehicleMediator.LeftPressed();
             }
-            else if (UnityEngine.Input.GetButtonDown("Right"))
+            else if (Input.GetButtonDown("Right"))
             {
-                TurnRight();
-            }
-        }
-
-        private void TurnLeft()
-        {
-            foreach (var wheel in _wheels)
-            {
-                wheel.TurnLeft();
-            }
-        }
-
-        private void TurnRight()
-        {
-            foreach (var wheel in _wheels)
-            {
-                wheel.TurnRight();
+                vehicleMediator.RigthPressed();
             }
         }
     }

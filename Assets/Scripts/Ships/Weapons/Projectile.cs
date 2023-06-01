@@ -9,6 +9,8 @@ namespace Ships.Weapons
         [SerializeField] private float speed;
         [SerializeField] private Rigidbody2D rb2D;
 
+        public string id;
+
         private void Start()
         {
             StartCoroutine(DestroyIn(4f));

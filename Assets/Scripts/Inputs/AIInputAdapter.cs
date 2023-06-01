@@ -6,19 +6,19 @@ namespace Inputs
     public class AIInputAdapter : IInput
     {
 
-        private Ship ship;
+        private ShipMediator shipMediator;
         private int currentDirX;
         private IInput inputImplementation;
 
-        public AIInputAdapter(Ship ship)
+        public AIInputAdapter(ShipMediator shipMediator)
         {
-            this.ship = ship;
+            this.shipMediator = shipMediator;
             currentDirX = 1;
         }
 
         public Vector2 GetDirection()
         {
-            Vector3 viewportPoint = Camera.main.WorldToViewportPoint(ship.transform.position);
+            Vector3 viewportPoint = Camera.main.WorldToViewportPoint(shipMediator.transform.position);
             if (viewportPoint.x < 0.05f)
             {
                 currentDirX = 1;
