@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Ships
+namespace Inputs
 {
     public class UnityInputAdapter : IInput
     {
@@ -10,6 +10,11 @@ namespace Ships
             float vertical = Input.GetAxis("Vertical");
 
             return new Vector2(horizontal, vertical);
+        }
+
+        public bool IsFireActionPressed()
+        {
+            return Input.GetButton("Fire1");
         }
     }
 }

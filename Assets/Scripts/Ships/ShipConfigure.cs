@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Inputs;
+using UnityEngine;
 
 namespace Ships
 {
@@ -6,6 +7,7 @@ namespace Ships
     {
         [SerializeField] private Ship ship;
         [SerializeField] private Joystick joystick;
+        [SerializeField] private JoyButton joyButton;
         [SerializeField] private bool isUsingJoystic;
         [SerializeField] private bool useIA;
 
@@ -23,9 +25,11 @@ namespace Ships
             
             if (isUsingJoystic)
             {
-                return new JoystickInputAdapter(joystick);
+                return new JoystickInputAdapter(joystick, joyButton);
             }
-            
+            Destroy(joystick);
+            Destroy(joyButton);
+
             return new UnityInputAdapter();
         }
 
