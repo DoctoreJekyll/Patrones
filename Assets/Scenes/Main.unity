@@ -291,6 +291,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &528970338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 528970340}
+  - component: {fileID: 528970339}
+  m_Layer: 0
+  m_Name: Factory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &528970339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528970338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 687b9cba5bb5c254b90026a387b3cdcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalProjectile: {fileID: 4852154349704538043, guid: 5b510f756c1b8544483301a16db00240,
+    type: 3}
+--- !u!4 &528970340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528970338}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &560616466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -601,22 +646,30 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3982472195183907758, guid: 03df152f1408e412790a6f82d5833407,
         type: 3}
+      propertyPath: factory
+      value: 
+      objectReference: {fileID: 528970339}
+    - target: {fileID: 3982472195183907758, guid: 03df152f1408e412790a6f82d5833407,
+        type: 3}
+      propertyPath: projectile.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982472195183907758, guid: 03df152f1408e412790a6f82d5833407,
+        type: 3}
       propertyPath: projectile.Array.data[0]
       value: 
-      objectReference: {fileID: 2551575745652912369, guid: 5b510f756c1b8544483301a16db00240,
+      objectReference: {fileID: 4852154349704538043, guid: 5b510f756c1b8544483301a16db00240,
         type: 3}
     - target: {fileID: 3982472195183907758, guid: 03df152f1408e412790a6f82d5833407,
         type: 3}
       propertyPath: projectile.Array.data[1]
       value: 
-      objectReference: {fileID: 2551575745652912369, guid: 5c0fc81a3146a5b4a814ee172acabff5,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3982472195183907758, guid: 03df152f1408e412790a6f82d5833407,
         type: 3}
       propertyPath: projectile.Array.data[2]
       value: 
-      objectReference: {fileID: 2551575745652912369, guid: eda94981433c54945a44dc1a10cb9791,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3982472195643883700, guid: 03df152f1408e412790a6f82d5833407,
         type: 3}
       propertyPath: m_Name

@@ -8,8 +8,9 @@ namespace Ships.Weapons
     {
         
         [SerializeField] private float couldownShoot;
-        [SerializeField] private Projectile[] projectile;
+        //[SerializeField] private Projectile[] projectile;
         [SerializeField] private Transform shootSpawnPos;
+        [SerializeField] private ProjectileFactory factory;
 
         private string activeProjectileId;
         private float timeToBeAbleToShoot;
@@ -18,7 +19,7 @@ namespace Ships.Weapons
         public void Configure(IShip iShipT)
         {
             iShip = iShipT;
-            activeProjectileId = "Projectile2";
+            activeProjectileId = "Normal";
         }
         
         public void TryShoot()
@@ -35,10 +36,10 @@ namespace Ships.Weapons
         private void Shoot()
         {
             //Busqueda del primer identificador usando First(metodo de Linq)
-            Projectile prefab = projectile.First(projectile1 => projectile1.id.Equals(activeProjectileId));
+            //Projectile prefab = projectile.First(projectile1 => projectile1.Id.Equals(activeProjectileId));
             
             timeToBeAbleToShoot = couldownShoot;
-            Instantiate(prefab, shootSpawnPos.position, shootSpawnPos.rotation);
+            factory.Create("Normal", shootSpawnPos, shootSpawnPos.rotation);
         }
     }
 }
