@@ -155,7 +155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b09dda95f204928bbb1d1450305af02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  couldownShoot: 0.5
-  projectile: {fileID: 2551575745652912369, guid: 5b510f756c1b8544483301a16db00240,
+  configuration: {fileID: 11400000, guid: 5ffbd630bc66a444bba157610709755b, type: 2}
+  dejaultProjectile: {fileID: 4852154349704538043, guid: 5b510f756c1b8544483301a16db00240,
     type: 3}
+  couldownShoot: 0.5
   shootSpawnPos: {fileID: 739517867}
+  timeToBeAbleToShoot: 0

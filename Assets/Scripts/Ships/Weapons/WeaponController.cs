@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Inputs;
 using UnityEngine;
 
@@ -6,22 +7,31 @@ namespace Ships.Weapons
 {
     public class WeaponController : MonoBehaviour
     {
-        
-        [SerializeField] private float couldownShoot;
-        //[SerializeField] private Projectile[] projectile;
-        [SerializeField] private Transform shootSpawnPos;
-        [SerializeField] private ProjectileFactory factory;
+        [Header("Configuration")]
+        [SerializeField] private ProjectilesConfiguration configuration;
+        [SerializeField] private Projectile dejaultProjectile;
 
+        [Header("Values")]
+        [SerializeField] private float couldownShoot;
+        [SerializeField] private Transform shootSpawnPos;
+        [SerializeField] private float timeToBeAbleToShoot;
+        
+        private ProjectileFactory factory;
         private string activeProjectileId;
-        private float timeToBeAbleToShoot;
         private IShip iShip;
 
+        private void Awake()
+        {
+            factory = new ProjectileFactory(Instantiate(configuration));
+        }
+
+        //Base configuracion
         public void Configure(IShip iShipT)
         {
             iShip = iShipT;
-            activeProjectileId = "Normal";
+            activeProjectileId = dejaultProjectile.Id;
         }
-        
+
         public void TryShoot()
         {
             timeToBeAbleToShoot -= Time.deltaTime;
@@ -39,7 +49,14 @@ namespace Ships.Weapons
             //Projectile prefab = projectile.First(projectile1 => projectile1.Id.Equals(activeProjectileId));
             
             timeToBeAbleToShoot = couldownShoot;
-            factory.Create("Verde", shootSpawnPos, shootSpawnPos.rotation);
+            factory.Create(SetActiveProjectileId(activeProjectileId), shootSpawnPos, shootSpawnPos.rotation);
+        }
+
+        //Si cogemos un powerup o algun cambio de projectile llamamos a esta clase
+        public string SetActiveProjectileId(string newId)
+        {
+            activeProjectileId = newId;
+            return activeProjectileId;
         }
     }
 }
