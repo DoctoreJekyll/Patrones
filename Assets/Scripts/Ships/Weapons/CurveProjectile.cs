@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 namespace Ships.Weapons
 {
-    public class SinusoidalProjectile : Projectile
+    public class CurveProjectile : Projectile
     {
         [SerializeField] private float speed;
         [SerializeField] private Rigidbody2D rb2D;
-        [SerializeField] private float frequency;
-        [SerializeField] private float amplitude;
+        [SerializeField] private AnimationCurve horizontalPosCurve;
 
         private Transform myTransform;
         private Vector3 currentPos;
@@ -32,7 +31,7 @@ namespace Ships.Weapons
         private void ProjectileMovementSinusoidal()
         {
             currentPos += myTransform.up * (speed * Time.deltaTime);
-            Vector3 horizontalPosition = myTransform.right * (amplitude * Mathf.Sin(currenTime * frequency));
+            Vector3 horizontalPosition = myTransform.right * horizontalPosCurve.Evaluate(currenTime);
             rb2D.MovePosition(currentPos + horizontalPosition);
 
             currenTime += Time.deltaTime;

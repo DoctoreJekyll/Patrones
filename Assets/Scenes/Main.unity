@@ -603,7 +603,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dejaultProjectile
       value: 
-      objectReference: {fileID: 4852154349704538043, guid: 5b510f756c1b8544483301a16db00240,
+      objectReference: {fileID: -2825900615492369281, guid: 131f60deae7d37f4dbcc78ede0174442,
         type: 3}
     - target: {fileID: 3982472195643883700, guid: 03df152f1408e412790a6f82d5833407,
         type: 3}

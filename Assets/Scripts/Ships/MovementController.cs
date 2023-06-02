@@ -23,7 +23,7 @@ namespace Ships
         
         public void Move(Vector2 direction)
         {
-            myTransform.Translate(direction * (speed * Time.deltaTime));
+            myTransform.Translate(direction.normalized * (speed * Time.deltaTime));
             checkLimitsInterface.ClampFinalPos();
         }
     }
