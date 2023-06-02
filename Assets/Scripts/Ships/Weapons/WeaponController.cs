@@ -39,7 +39,7 @@ namespace Ships.Weapons
             //Projectile prefab = projectile.First(projectile1 => projectile1.Id.Equals(activeProjectileId));
             
             timeToBeAbleToShoot = couldownShoot;
-            factory.Create("Normal", shootSpawnPos, shootSpawnPos.rotation);
+            factory.Create("Verde", shootSpawnPos, shootSpawnPos.rotation);
         }
     }
 }

@@ -320,8 +320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687b9cba5bb5c254b90026a387b3cdcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalProjectile: {fileID: 4852154349704538043, guid: 5b510f756c1b8544483301a16db00240,
-    type: 3}
+  projectiles:
+  - {fileID: 4852154349704538043, guid: 5b510f756c1b8544483301a16db00240, type: 3}
+  - {fileID: -5835913264952934986, guid: 5c0fc81a3146a5b4a814ee172acabff5, type: 3}
 --- !u!4 &528970340
 Transform:
   m_ObjectHideFlags: 0
