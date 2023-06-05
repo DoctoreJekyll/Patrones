@@ -1,30 +1,24 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Ships.Weapons
+namespace Ships.Weapons.Projectiles
 {
     public class SinusoidalProjectile : Projectile
     {
         [SerializeField] private float speed;
-        [SerializeField] private Rigidbody2D rb2D;
         [SerializeField] private float frequency;
         [SerializeField] private float amplitude;
-
-        private Transform myTransform;
+        
         private Vector3 currentPos;
         private float currenTime;
 
-
-        private void Start()
+        protected override void DoStart()
         {
-            myTransform = transform;
-            
-            StartCoroutine(DestroyIn(4f));
             currentPos = myTransform.position;
             currenTime = 0f;
         }
 
-        private void FixedUpdate()
+        protected override void DoMove()
         {
             ProjectileMovementSinusoidal();
         }
@@ -38,10 +32,9 @@ namespace Ships.Weapons
             currenTime += Time.deltaTime;
         }
 
-        private IEnumerator DestroyIn(float seconds)
+        protected override void DoDestroy()
         {
-            yield return new WaitForSeconds(seconds);
-            Destroy(gameObject);
+            Debug.Log("Se destruye projectil" + gameObject.name);
         }
     }
 }
