@@ -8,6 +8,8 @@ namespace Ships
     {
         [SerializeField] private MovementController movementController;
         [SerializeField] private WeaponController weaponController;
+        [SerializeField] private ShipId shipId;
+        public ShipId ShipId => shipId;
 
         private IInput inputInterface;
 

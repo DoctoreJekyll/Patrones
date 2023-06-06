@@ -7,7 +7,7 @@ namespace Inputs
     {
 
         private ShipMediator shipMediator;
-        private int currentDirX;
+        private float currentDirX;
         private IInput inputImplementation;
 
         public AIInputAdapter(ShipMediator shipMediator)
@@ -21,13 +21,13 @@ namespace Inputs
             Vector3 viewportPoint = Camera.main.WorldToViewportPoint(shipMediator.transform.position);
             if (viewportPoint.x < 0.05f)
             {
-                currentDirX = 1;
+                currentDirX = shipMediator.transform.right.x;
             }
             else if (viewportPoint.x > 0.95f)
             {
-                currentDirX = -1;
+                currentDirX = -shipMediator.transform.right.x;
             }
-            return new Vector2(currentDirX, 0);
+            return new Vector2(currentDirX, 1);
         }
 
         public bool IsFireActionPressed()

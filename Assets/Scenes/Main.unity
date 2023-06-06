@@ -577,7 +577,7 @@ MonoBehaviour:
   joystick: {fileID: 689759991}
   joyButton: {fileID: 97269702}
   isUsingJoystic: 0
-  useIA: 0
+  useIA: 1
 --- !u!4 &904082613
 Transform:
   m_ObjectHideFlags: 0
@@ -603,8 +603,18 @@ PrefabInstance:
         type: 3}
       propertyPath: dejaultProjectile
       value: 
-      objectReference: {fileID: -2825900615492369281, guid: 131f60deae7d37f4dbcc78ede0174442,
+      objectReference: {fileID: 4852154349704538043, guid: 5b510f756c1b8544483301a16db00240,
         type: 3}
+    - target: {fileID: 3982472195183907759, guid: 03df152f1408e412790a6f82d5833407,
+        type: 3}
+      propertyPath: speed.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982472195183907759, guid: 03df152f1408e412790a6f82d5833407,
+        type: 3}
+      propertyPath: speed.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3982472195643883700, guid: 03df152f1408e412790a6f82d5833407,
         type: 3}
       propertyPath: m_Name

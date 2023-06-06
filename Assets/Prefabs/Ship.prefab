@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementController: {fileID: 3982472195183907759}
   weaponController: {fileID: 3982472195183907758}
+  shipId: {fileID: 11400000, guid: 0242257167533a34aa9376696dc54ebc, type: 2}
 --- !u!114 &3982472195183907759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configuration: {fileID: 11400000, guid: 5ffbd630bc66a444bba157610709755b, type: 2}
-  dejaultProjectile: {fileID: 4852154349704538043, guid: 5b510f756c1b8544483301a16db00240,
+  dejaultProjectile: {fileID: -2825900615492369281, guid: 131f60deae7d37f4dbcc78ede0174442,
     type: 3}
   couldownShoot: 0.5
   shootSpawnPos: {fileID: 739517867}

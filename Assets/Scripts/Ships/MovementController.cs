@@ -4,7 +4,7 @@ namespace Ships
 {
     public class MovementController : MonoBehaviour
     {
-        [SerializeField] private float speed;
+        [SerializeField] private Vector2 speed;
         
         private IShip iShip;
         private Transform myTransform;
