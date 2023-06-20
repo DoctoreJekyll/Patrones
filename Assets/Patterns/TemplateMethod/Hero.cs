@@ -4,21 +4,21 @@ namespace Patterns.TemplateMethod
 {
     public class Hero : MonoBehaviour
     {
-        [SerializeField] private ActiveSkill skill1;
-        [SerializeField] private ActiveSkill skill2;
+        [SerializeField] private ActiveSkill _skill1;
+        [SerializeField] private ActiveSkill _skill2;
 
-        [SerializeField] private float maxHealth;
-        private float currentHealth;
+        [SerializeField] private float _maxHealth;
+        private float _currentHealth;
 
         private void Awake()
         {
-            currentHealth = maxHealth / 2;
+            _currentHealth = _maxHealth / 2;
         }
 
         public void AddHealth(float healthToAdd)
         {
-            currentHealth = Mathf.Clamp(currentHealth + healthToAdd, 0, maxHealth);
-            Debug.Log($"Current health: {currentHealth}");
+            _currentHealth = Mathf.Clamp(_currentHealth + healthToAdd, 0, _maxHealth);
+            Debug.Log($"Current health: {_currentHealth}");
         }
 
         private void Update()
@@ -29,19 +29,19 @@ namespace Patterns.TemplateMethod
 
         private void UpdateSkills()
         {
-            skill1.Update();
-            skill2.Update();
+            _skill1.Update();
+            _skill2.Update();
         }
 
         private void TryUseSkills()
         {
-            if (Input.GetKey(KeyCode.Q))
+            if (UnityEngine.Input.GetKey(KeyCode.Q))
             {
-                TryUseSkill(skill1);
+                TryUseSkill(_skill1);
             }
-            else if (Input.GetKey(KeyCode.W))
+            else if (UnityEngine.Input.GetKey(KeyCode.W))
             {
-                TryUseSkill(skill2);
+                TryUseSkill(_skill2);
             }
         }
 

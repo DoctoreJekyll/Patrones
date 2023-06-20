@@ -1,51 +1,52 @@
-﻿using System;
 using UnityEngine;
 
 namespace Patterns.Mediator
 {
-    //Este va a ser mi mediador central
-    public class VehicleMediator : MonoBehaviour, IVehicleMediator
+    public class VehicleMediator : MonoBehaviour, Vehicle
     {
-        [SerializeField] private Wheel[] wheels;
-        [SerializeField] private VehicleLight[] vehicleLights;
-        [SerializeField] private SteeringWheel steeringWheel;
-        [SerializeField] private Brake brake;
+        [SerializeField] private Wheel[] _wheels;
+        [SerializeField] private VehicleLight[] _brakeLights;
+        [SerializeField] private SteeringWheel _steeringWheel;
+        [SerializeField] private Brake _brake;
+        [SerializeField] private Autopilot _autopilot;
 
         private void Awake()
         {
-            foreach (Wheel wheel in wheels)
+            foreach (var brakeLight in _brakeLights)
+            {
+                brakeLight.Configure(this);
+            }
+
+            foreach (var wheel in _wheels)
             {
                 wheel.Configure(this);
             }
-            foreach (VehicleLight vLight in vehicleLights)
-            {
-                vLight.Configure(this);
-            }
-            brake.Configure(this);
-            steeringWheel.Configure(this);
+            _brake.Configure(this);
+            _steeringWheel.Configure(this);
+            _autopilot.Configure(this);
         }
 
-        public void BrakeRelease()
+        public void BrakePressed()
         {
-            foreach (var wheel in wheels)
+            foreach (var wheel in _wheels)
             {
                 wheel.AddFriction();
             }
 
-            foreach (var brakeLight in vehicleLights)
+            foreach (var brakeLight in _brakeLights)
             {
                 brakeLight.TurnOn();
             }
         }
 
-        public void BrakeUnrelease()
+        public void BrakeRelease()
         {
-            foreach (var wheel in wheels)
+            foreach (var wheel in _wheels)
             {
                 wheel.RemoveFriction();
             }
 
-            foreach (var brakeLight in vehicleLights)
+            foreach (var brakeLight in _brakeLights)
             {
                 brakeLight.TurnOff();
             }
@@ -53,18 +54,23 @@ namespace Patterns.Mediator
 
         public void LeftPressed()
         {
-            foreach (var wheel in wheels)
+            foreach (var wheel in _wheels)
             {
                 wheel.TurnLeft();
             }
         }
 
-        public void RigthPressed()
+        public void LeftRight()
         {
-            foreach (var wheel in wheels)
+            foreach (var wheel in _wheels)
             {
                 wheel.TurnRight();
             }
+        }
+
+        public void ObstacleDetected()
+        {
+            BrakePressed();
         }
     }
 }

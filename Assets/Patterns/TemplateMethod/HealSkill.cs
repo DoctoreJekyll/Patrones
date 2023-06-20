@@ -11,10 +11,10 @@ namespace Patterns.TemplateMethod
         {
         }
 
-        protected override void DoActivate(Hero heroTemp)
+        protected override void DoActivate(Hero hero)
         {
             healthToAdd = 10;
-            heroTemp.AddHealth(healthToAdd);
+            hero.AddHealth(healthToAdd);
         }
     }
 }

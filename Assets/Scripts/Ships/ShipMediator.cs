@@ -1,56 +1,41 @@
-using Inputs;
+using Ships.Common;
 using Ships.Weapons;
-using Ships.Weapons.Projectiles;
 using UnityEngine;
 
 namespace Ships
 {
-    public class ShipMediator : MonoBehaviour, IShip
+    [RequireComponent(typeof(MovementController))]
+    [RequireComponent(typeof(WeaponController))]
+    public class ShipMediator : MonoBehaviour, Ship
     {
-        [SerializeField] private MovementController movementController;
-        [SerializeField] private WeaponController weaponController;
-        [SerializeField] private ShipId shipId;
-        public ShipId ShipId => shipId;
+        [SerializeField] private MovementController _movementController;
+        [SerializeField] private WeaponController _weaponController;
 
-        private IInput inputInterface;
+        [SerializeField] private ShipId _shipId;
+        public string Id => _shipId.Value;
 
-        private void Awake()
+        private Input.Input _input;
+
+        public void Configure(ShipConfiguration configuration)
         {
-            //DependencyInjection();
-        }
-
-        public void Configure(IInput inputInterfaceParam, ICheckLimits checkLimitsInterfaceParam, Vector2 speed, float fireRate, Projectile projectileId)
-        {
-            this.inputInterface = inputInterfaceParam;
-            movementController.Configure(this, checkLimitsInterfaceParam);
-            weaponController.Configure(this);
-        }
-
-        //Injeccion de dependencias vieja, estamos injectando desde un configurador pero esto tambien serviria
-        private void DependencyInjection()
-        {
-            //inputInterface = new UnityInputAdapter();
-            //checkLimitsInterface = new ViewportCheckLimits(myTransform);
+            _input = configuration.Input;
+            _movementController.Configure(this, configuration.CheckLimits, configuration.Speed);
+            _weaponController.Configure(this, configuration.FireRate, configuration.DefaultProjectileId);
         }
 
         private void Update()
         {
-            var direction = GetDirection();
-            movementController.Move(direction);
+            var direction = _input.GetDirection();
+            _movementController.Move(direction);
             TryShoot();
         }
 
         private void TryShoot()
         {
-            if (inputInterface.IsFireActionPressed())
+            if (_input.IsFireActionPressed())
             {
-                weaponController.TryShoot();
+                _weaponController.TryShoot();
             }
-        }
-
-        private Vector2 GetDirection()
-        {
-            return inputInterface.GetDirection();
         }
     }
 }

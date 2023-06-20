@@ -4,12 +4,12 @@ namespace Patterns.TemplateMethod
 {
     public abstract class ActiveSkill : ScriptableObject
     {
-        [SerializeField] private float cooldownSeconds;
-        private float currentCooldown;
+        [SerializeField] private float _cooldownSeconds;
+        private float _currentCooldown;
 
         public bool IsReady()
         {
-            return currentCooldown <= 0f;
+            return _currentCooldown <= 0f;
         }
 
         public void Activate(Hero hero)
@@ -20,17 +20,17 @@ namespace Patterns.TemplateMethod
 
         private void SetCooldown()
         {
-            currentCooldown = cooldownSeconds;
+            _currentCooldown = _cooldownSeconds;
         }
 
         public void Update()
         {
-            currentCooldown -= Time.deltaTime;
-            currentCooldown = Mathf.Max(0, currentCooldown);
+            _currentCooldown -= Time.deltaTime;
+            _currentCooldown = Mathf.Max(0, _currentCooldown);
             DoUpdate();
         }
 
         protected abstract void DoUpdate();
-        protected abstract void DoActivate(Hero heroTemp);
+        protected abstract void DoActivate(Hero hero);
     }
 }

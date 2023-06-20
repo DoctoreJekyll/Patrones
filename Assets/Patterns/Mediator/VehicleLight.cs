@@ -4,22 +4,22 @@ namespace Patterns.Mediator
 {
     public class VehicleLight : MonoBehaviour
     {
-        [SerializeField] private Light carLight;
-        private IVehicleMediator vehicleMediator;
+        [SerializeField] private Light _light;
+        private Vehicle _vehicle;
 
-        public void Configure(IVehicleMediator mediator)
+        public void Configure(Vehicle vehicle)
         {
-            this.vehicleMediator = mediator;
+            _vehicle = vehicle;
         }
-        
+
         public void TurnOn()
         {
-            carLight.enabled = true;
+            _light.enabled = true;
         }
 
         public void TurnOff()
         {
-            carLight.enabled = false;
+            _light.enabled = false;
         }
     }
 }

@@ -5,34 +5,34 @@ namespace Patterns.TemplateMethod
     [CreateAssetMenu(menuName = "TemplateMethod/Create HealOverTime", fileName = "HealOverTime", order = 0)]
     public class HealOverTime : ActiveSkill
     {
-        [SerializeField] private float secondsActive;
+        [SerializeField] private float _secondsActive;
         [SerializeField] private int healthToAd;
 
-        private float currentTimeInSeconds;
-        private bool isActivate;
-        private Hero hero;
+        private float _currentTimeInSeconds;
+        private bool _isActivate;
+        private Hero _hero;
 
         protected override void DoUpdate()
         {
-            if (!isActivate)
+            if (!_isActivate)
             {
                 return;
             }
             
-            hero.AddHealth(healthToAd * Time.deltaTime);
+            _hero.AddHealth(healthToAd * Time.deltaTime);
             
-            currentTimeInSeconds += Time.deltaTime;
-            if (currentTimeInSeconds > secondsActive)
+            _currentTimeInSeconds += Time.deltaTime;
+            if (_currentTimeInSeconds > _secondsActive)
             {
-                isActivate = false;
+                _isActivate = false;
             }
         }
 
-        protected override void DoActivate(Hero heroTemp)
+        protected override void DoActivate(Hero hero)
         {
-            isActivate = true;
-            currentTimeInSeconds = 0;
-            this.hero = heroTemp;
+            _isActivate = true;
+            _currentTimeInSeconds = 0;
+            _hero = hero;
         }
     }
 }

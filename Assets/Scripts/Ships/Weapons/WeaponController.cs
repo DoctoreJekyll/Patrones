@@ -1,63 +1,51 @@
-﻿using System;
+using System;
 using System.Linq;
-using Inputs;
-using Ships.Weapons.Projectiles;
 using UnityEngine;
 
 namespace Ships.Weapons
 {
     public class WeaponController : MonoBehaviour
     {
-        [Header("Configuration")]
-        [SerializeField] private ProjectilesConfiguration configuration;
-        [SerializeField] private Projectile dejaultProjectile;
+        [SerializeField] private ProjectilesConfiguration _projectilesConfiguration;
+        private float _fireRateInSeconds;
+        [SerializeField] private Transform _projectileSpawnPosition;
+        private float _remainingSecondsToBeAbleToShoot;
+        private ProjectileFactory _projectileFactory;
 
-        [Header("Values")]
-        [SerializeField] private float couldownShoot;
-        [SerializeField] private Transform shootSpawnPos;
-        [SerializeField] private float timeToBeAbleToShoot;
-        
-        private ProjectileFactory factory;
-        private string activeProjectileId;
-        private IShip iShip;
+        private string _activeProjectileId;
+        private Ship _ship;
 
         private void Awake()
         {
-            factory = new ProjectileFactory(Instantiate(configuration));
+            var instance = Instantiate(_projectilesConfiguration);
+            _projectileFactory = new ProjectileFactory(instance);
         }
 
-        //Base configuracion
-        public void Configure(IShip iShipT)
+        public void Configure(Ship ship, float fireRate, ProjectileId defaultProjectileId)
         {
-            iShip = iShipT;
-            activeProjectileId = dejaultProjectile.Id;
+            _ship = ship;
+            _activeProjectileId = defaultProjectileId.Value;
+            _fireRateInSeconds = fireRate;
         }
 
         public void TryShoot()
         {
-            timeToBeAbleToShoot -= Time.deltaTime;
-            if (timeToBeAbleToShoot > 0)
+            _remainingSecondsToBeAbleToShoot -= Time.deltaTime;
+            if (_remainingSecondsToBeAbleToShoot > 0)
             {
                 return;
             }
-            
+
             Shoot();
         }
-        
+
         private void Shoot()
         {
-            //Busqueda del primer identificador usando First(metodo de Linq)
-            //Projectile prefab = projectile.First(projectile1 => projectile1.Id.Equals(activeProjectileId));
-            
-            timeToBeAbleToShoot = couldownShoot;
-            factory.Create(SetActiveProjectileId(activeProjectileId), shootSpawnPos, shootSpawnPos.rotation);
-        }
-
-        //Si cogemos un powerup o algun cambio de projectile llamamos a esta clase
-        public string SetActiveProjectileId(string newId)
-        {
-            activeProjectileId = newId;
-            return activeProjectileId;
+            var projectile = _projectileFactory
+               .Create(_activeProjectileId,
+                       _projectileSpawnPosition.position,
+                       _projectileSpawnPosition.rotation);
+            _remainingSecondsToBeAbleToShoot = _fireRateInSeconds;
         }
     }
 }

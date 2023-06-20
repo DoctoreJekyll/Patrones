@@ -1,26 +1,22 @@
 using Ships.Weapons.Projectiles;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Ships.Weapons
 {
-    public class ProjectileFactory 
+    public class ProjectileFactory
     {
-
-        private readonly ProjectilesConfiguration configuration;
+        private readonly ProjectilesConfiguration _configuration;
 
         public ProjectileFactory(ProjectilesConfiguration configuration)
         {
-            this.configuration = configuration;
+            _configuration = configuration;
         }
 
-        public Projectile Create(string id, Transform initTransform, Quaternion rotation)
+        public Projectile Create(string id, Vector3 position, Quaternion rotation)
         {
-            Projectile projectile = configuration.GetPowerUpByID(id);
-            return Object.Instantiate(projectile, initTransform.position ,rotation);
+            var prefab = _configuration.GetProjectileById(id);
+
+            return Object.Instantiate(prefab, position, rotation);
         }
-
-
-
     }
 }

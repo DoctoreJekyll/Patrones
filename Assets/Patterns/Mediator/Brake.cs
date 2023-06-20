@@ -1,26 +1,25 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Patterns.Mediator
 {
     public class Brake : MonoBehaviour
     {
-        private IVehicleMediator vehicleInterface;
+        private Vehicle _vehicle;
 
-        public void Configure(IVehicleMediator vehicle)
+        public void Configure(Vehicle vehicle)
         {
-            vehicleInterface = vehicle;
+            _vehicle = vehicle;
         }
-
+        
         private void Update()
         {
-            if (UnityEngine.Input.GetButtonDown("Break"))
+            if (UnityEngine.Input.GetButtonDown("Brake"))
             {
-                vehicleInterface.BrakeRelease();
+                _vehicle.BrakePressed();
             }
-            else if (UnityEngine.Input.GetButtonUp("Break"))
+            else if (UnityEngine.Input.GetButtonUp("Brake"))
             {
-                vehicleInterface.BrakeUnrelease();
+                _vehicle.BrakeRelease();
             }
         }
     }

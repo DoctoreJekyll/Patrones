@@ -1,26 +1,24 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Patterns.Mediator
 {
     public class SteeringWheel : MonoBehaviour
     {
-        private IVehicleMediator vehicleMediator;
-        
-        public void Configure(IVehicleMediator vehicleMediatorT)
-        {
-            this.vehicleMediator = vehicleMediatorT;
-        }
+        private Vehicle _vehicle;
 
+        public void Configure(Vehicle vehicle)
+        {
+            _vehicle = vehicle;
+        }
         private void Update()
         {
-            if (Input.GetButtonDown("Left"))
+            if (UnityEngine.Input.GetButtonDown("Left"))
             {
-                vehicleMediator.LeftPressed();
+                _vehicle.LeftPressed();
             }
-            else if (Input.GetButtonDown("Right"))
+            else if (UnityEngine.Input.GetButtonDown("Right"))
             {
-                vehicleMediator.RigthPressed();
+                _vehicle.LeftRight();
             }
         }
     }

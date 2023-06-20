@@ -6,27 +6,32 @@ namespace Patterns.Adapter
 {
     public class Consumer : MonoBehaviour
     {
-        private IDataStore dataStore;
+        private DataStore _dataStore;
 
         private void Awake()
         {
-            //Guardamos datos
-            dataStore = GetDataStore();
-            Data data = new Data("Dato1", 123);
-            dataStore.SetData(data, "Data1");
+            _dataStore = GetDataStore();
+
+            var data = new Data("Dato1", 123);
+            _dataStore.SetData(data, "Data1");
         }
 
-        private IDataStore GetDataStore()
+        private DataStore GetDataStore()
         {
-            return new PlayerPrefsAdapter();
+            var isEven = Random.Range(0, 99) % 2 == 0;
+            if (isEven)
+            {
+                return new PlayerPrefsDataStoreAdapter();
+            }
+
+            return new FileDataStoreAdapter();
         }
 
         private void Start()
         {
-            //Cargamos datos
-            Data data = dataStore.GetData<Data>("Data1");
-            Debug.Log(data.dato1);
-            Debug.Log(data.dato2);
+            var data = _dataStore.GetData<Data>("Data1");
+            Debug.Log(data.Dato1);
+            Debug.Log(data.Dato2);
         }
     }
 }

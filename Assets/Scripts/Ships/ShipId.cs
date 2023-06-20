@@ -2,10 +2,11 @@ using UnityEngine;
 
 namespace Ships
 {
-    [CreateAssetMenu(menuName = "Create Ship", fileName = "ShipId", order = 0)]
+    [CreateAssetMenu(menuName = "Create ShipId", fileName = "ShipId", order = 0)]
     public class ShipId : ScriptableObject
     {
-        [SerializeField] private string id;
-        public string Id => id;
+        [SerializeField] private string _value;
+
+        public string Value => _value;
     }
 }

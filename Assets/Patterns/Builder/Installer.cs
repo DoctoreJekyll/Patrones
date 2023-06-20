@@ -8,41 +8,41 @@ namespace Patterns.Builder
 {
     public class Installer : MonoBehaviour
     {
-        [SerializeField] private Armor normalArmor;
-        [SerializeField] private Armor reflectiveArmor;
-        [SerializeField] private Weapon bow;
-        [SerializeField] private Weapon sword;
-        [SerializeField] private Hero heroPrefab;
+        [SerializeField] private Armor _normalArmor;
+        [SerializeField] private Armor _reflectiveArmor;
+        [SerializeField] private Weapon _bow;
+        [SerializeField] private Weapon _sword;
+        [SerializeField] private Hero _heroPrefab;
 
-        [SerializeField] private Button normalArmorButton;
-        [SerializeField] private Button reflectiveArmorButton;
-        [SerializeField] private Button bowButton;
-        [SerializeField] private Button swordButton;
+        [SerializeField] private Button _normalArmorButton;
+        [SerializeField] private Button _reflectiveArmorButton;
+        [SerializeField] private Button _bowButton;
+        [SerializeField] private Button _swordButton;
 
-        [SerializeField] private Button buildButton;
+        [SerializeField] private Button _buildButton;
 
-        private HeroBuilder heroBuilder;
-        private GameObject currentHero;
+        private HeroBuilder _heroBuilder;
+        private GameObject _currentHero;
 
         private void Awake()
         {
-            heroBuilder = new HeroBuilder().FromHeroPrefab(heroPrefab);
-            normalArmorButton.onClick.AddListener(() => heroBuilder.WithArmor(normalArmor));
-            reflectiveArmorButton.onClick.AddListener(() => heroBuilder.WithArmor(reflectiveArmor));
-            swordButton.onClick.AddListener(() => heroBuilder.WithWeapon(sword));
-            bowButton.onClick.AddListener(() => heroBuilder.WithWeapon(bow));
+            _heroBuilder = new HeroBuilder().FromHeroPrefab(_heroPrefab);
+            _normalArmorButton.onClick.AddListener(() => _heroBuilder.WithArmor(_normalArmor));
+            _reflectiveArmorButton.onClick.AddListener(() => _heroBuilder.WithArmor(_reflectiveArmor));
+            _swordButton.onClick.AddListener(() => _heroBuilder.WithWeapon(_sword));
+            _bowButton.onClick.AddListener(() => _heroBuilder.WithWeapon(_bow));
 
-            buildButton.onClick.AddListener(InstantiateHero);
+            _buildButton.onClick.AddListener(InstantiateHero);
         }
 
         private void InstantiateHero()
         {
-            if (currentHero != null)
+            if (_currentHero != null)
             {
-                Destroy(currentHero);
+                Destroy(_currentHero);
             }
 
-            currentHero = heroBuilder.Build().gameObject;
+            _currentHero = _heroBuilder.Build().gameObject;
         }
     }
 }

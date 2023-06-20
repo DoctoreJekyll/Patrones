@@ -1,39 +1,33 @@
-﻿using System.Collections;
 using UnityEngine;
 
 namespace Ships.Weapons.Projectiles
 {
     public class CurveProjectile : Projectile
     {
-        [SerializeField] private float speed;
-        [SerializeField] private AnimationCurve horizontalPosCurve;
-        
-        private Vector3 currentPos;
-        private float currenTime;
+        [SerializeField] private float _speed;
+        [SerializeField] private AnimationCurve _horizontalPosition;
+
+        private float _currentTime;
+        private Vector3 _currentPosition;
 
         protected override void DoStart()
         {
-            currentPos = MyTransform.position;
-            currenTime = 0f;
+            _currentTime = 0;
+            _currentPosition = MyTransform.position;
         }
 
         protected override void DoMove()
         {
-            ProjectileMovementSinusoidal();
-        }
+            _currentPosition += MyTransform.up * (_speed * Time.deltaTime);
+            var horizontalPosition = MyTransform.right * _horizontalPosition.Evaluate(_currentTime);
 
-        private void ProjectileMovementSinusoidal()
-        {
-            currentPos += MyTransform.up * (speed * Time.deltaTime);
-            Vector3 horizontalPosition = MyTransform.right * horizontalPosCurve.Evaluate(currenTime);
-            rb2D.MovePosition(currentPos + horizontalPosition);
+            _rigidbody2D.MovePosition(_currentPosition + horizontalPosition);
 
-            currenTime += Time.deltaTime;
+            _currentTime += Time.deltaTime;
         }
 
         protected override void DoDestroy()
         {
-            Debug.Log("Se destruye projectil" + gameObject.name);
         }
     }
 }

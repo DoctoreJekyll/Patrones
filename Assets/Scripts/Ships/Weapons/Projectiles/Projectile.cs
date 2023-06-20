@@ -1,22 +1,23 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 namespace Ships.Weapons.Projectiles
 {
+    [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Projectile : MonoBehaviour
     {
-        [SerializeField] protected Rigidbody2D rb2D;
-        [SerializeField] private string id;
-        public string Id => id;
-        
+        [SerializeField] protected Rigidbody2D _rigidbody2D;
+        [SerializeField] private ProjectileId _id;
+
         protected Transform MyTransform;
+
+        public string Id => _id.Value;
 
         private void Start()
         {
             MyTransform = transform;
             DoStart();
-            StartCoroutine(DestroyIn(5f));
+            StartCoroutine(DestroyIn(5));
         }
 
         protected abstract void DoStart();
@@ -27,6 +28,11 @@ namespace Ships.Weapons.Projectiles
         }
 
         protected abstract void DoMove();
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            DestroyProjectile();
+        }
 
         private IEnumerator DestroyIn(float seconds)
         {
@@ -41,11 +47,5 @@ namespace Ships.Weapons.Projectiles
         }
 
         protected abstract void DoDestroy();
-
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-            DestroyProjectile();
-            //Damage
-        }
     }
 }
