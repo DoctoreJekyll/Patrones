@@ -1,5 +1,4 @@
 using Input;
-using Ships.CheckLimits;
 using Ships.Common;
 using Ships.Enemies;
 using UnityEngine;
@@ -15,16 +14,27 @@ namespace Ships
 
         [SerializeField] private ShipToSpawnConfiguration _shipConfiguration;
         [SerializeField] private ShipsConfiguration _shipsConfiguration;
-        
+        private ShipBuilder _shipBuilder;
+        private ShipMediator _userShip;
+
         private void Awake()
         {
             var shipFactory = new ShipFactory(Instantiate(_shipsConfiguration));
-            var shipBuilder = shipFactory.Create(_shipConfiguration.ShipId.Value)
-                                               .WithConfiguration(_shipConfiguration);
+            _shipBuilder = shipFactory.Create(_shipConfiguration.ShipId.Value)
+                                      .WithConfiguration(_shipConfiguration);
 
-            SetInput(shipBuilder);
-            SetCheckLimitsStrategy(shipBuilder);
-            shipBuilder.Build();
+            SetInput(_shipBuilder);
+            SetCheckLimitsStrategy(_shipBuilder);
+        }
+        
+        public void SpawnUserShip()
+        {
+            _userShip = _shipBuilder.Build();
+        }
+
+        public void DestroyUserShip()
+        {
+            Destroy(_userShip);
         }
 
         private void SetCheckLimitsStrategy(ShipBuilder shipBuilder)
@@ -58,5 +68,7 @@ namespace Ships
             Destroy(_joystick.gameObject);
             Destroy(_joyButton.gameObject);
         }
+
+       
     }
 }
