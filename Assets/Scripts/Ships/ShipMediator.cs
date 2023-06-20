@@ -1,5 +1,6 @@
 using Inputs;
 using Ships.Weapons;
+using Ships.Weapons.Projectiles;
 using UnityEngine;
 
 namespace Ships
@@ -18,7 +19,7 @@ namespace Ships
             //DependencyInjection();
         }
 
-        public void Configure(IInput inputInterfaceParam, ICheckLimits checkLimitsInterfaceParam)
+        public void Configure(IInput inputInterfaceParam, ICheckLimits checkLimitsInterfaceParam, Vector2 speed, float fireRate, Projectile projectileId)
         {
             this.inputInterface = inputInterfaceParam;
             movementController.Configure(this, checkLimitsInterfaceParam);

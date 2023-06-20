@@ -10,11 +10,11 @@ namespace Ships.Weapons.Projectiles
         [SerializeField] private string id;
         public string Id => id;
         
-        protected Transform myTransform;
+        protected Transform MyTransform;
 
         private void Start()
         {
-            myTransform = transform;
+            MyTransform = transform;
             DoStart();
             StartCoroutine(DestroyIn(5f));
         }

@@ -1,4 +1,5 @@
 ﻿using Inputs;
+using Ships.Enemys;
 using UnityEngine;
 
 namespace Ships
@@ -11,9 +12,11 @@ namespace Ships
         [SerializeField] private bool isUsingJoystic;
         [SerializeField] private bool useIA;
 
+        [SerializeField] private ShipToSpawnConfiguration spawnConfiguration;
+
         private void Awake()
         {
-            shipMediator.Configure(GetInput(), CheckLimits());
+            shipMediator.Configure(GetInput(), CheckLimits(), spawnConfiguration.Speed, spawnConfiguration.FireRate, spawnConfiguration.DefaultProjectileId);
         }
 
         private IInput GetInput()

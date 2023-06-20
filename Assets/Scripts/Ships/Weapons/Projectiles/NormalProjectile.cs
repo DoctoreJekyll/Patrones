@@ -18,7 +18,7 @@ namespace Ships.Weapons.Projectiles
 
         private void ProjectileMovement()
         {
-            rb2D.velocity = myTransform.up * speed;
+            rb2D.velocity = MyTransform.up * speed;
         }
         
 

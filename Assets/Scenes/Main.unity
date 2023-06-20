@@ -577,7 +577,8 @@ MonoBehaviour:
   joystick: {fileID: 689759991}
   joyButton: {fileID: 97269702}
   isUsingJoystic: 0
-  useIA: 1
+  useIA: 0
+  spawnConfiguration: {fileID: 0}
 --- !u!4 &904082613
 Transform:
   m_ObjectHideFlags: 0

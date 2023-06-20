@@ -14,7 +14,7 @@ namespace Ships.Weapons.Projectiles
 
         protected override void DoStart()
         {
-            currentPos = myTransform.position;
+            currentPos = MyTransform.position;
             currenTime = 0f;
         }
 
@@ -25,8 +25,8 @@ namespace Ships.Weapons.Projectiles
 
         private void ProjectileMovementSinusoidal()
         {
-            currentPos += myTransform.up * (speed * Time.deltaTime);
-            Vector3 horizontalPosition = myTransform.right * (amplitude * Mathf.Sin(currenTime * frequency));
+            currentPos += MyTransform.up * (speed * Time.deltaTime);
+            Vector3 horizontalPosition = MyTransform.right * (amplitude * Mathf.Sin(currenTime * frequency));
             rb2D.MovePosition(currentPos + horizontalPosition);
 
             currenTime += Time.deltaTime;

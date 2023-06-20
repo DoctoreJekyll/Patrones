@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1801e27094cd0b4db732463ca3efd48, type: 3}
   m_Name: ShipId1
   m_EditorClassIdentifier: 
-  id: 
+  id: Test

@@ -6,9 +6,8 @@ namespace Inputs
     public class AIInputAdapter : IInput
     {
 
-        private ShipMediator shipMediator;
+        private readonly ShipMediator shipMediator;
         private float currentDirX;
-        private IInput inputImplementation;
 
         public AIInputAdapter(ShipMediator shipMediator)
         {

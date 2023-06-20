@@ -15,7 +15,7 @@ namespace Patterns.Factory
 
         public void Create(string enemyId)
         {
-            var enemyPrefab = _enemiesConfiguration.GetEnemyById(enemyId);
+            Enemy enemyPrefab = _enemiesConfiguration.GetEnemyById(enemyId);
             Object.Instantiate(enemyPrefab, Random.onUnitSphere * 3, Quaternion.identity);
         }
     }
